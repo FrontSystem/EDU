@@ -4,6 +4,13 @@ function getDataSourceByData(data){
       pageSize: 10
     });
   }
+var getRandomColor = function(){    
+  return  '#' +    
+    (function(color){    
+    return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])    
+      && (color.length == 6) ?  color : arguments.callee(color);    
+  })('');    
+};
 $(document).ready(function (){
     var gridColumns=[
         {
@@ -255,6 +262,7 @@ $(document).ready(function (){
       placeholder: "请选择图表类型...",
       dataSource:[
          {text: "在读人数", value: "studying"},
+         {text: "在读人数（pie）", value: "studying_pie"},
          {text: "实际升学率", value: "actualEnrollmentRate"},
          {text: "预计升学率", value: "expectEnrollmentRate"}
       ],
@@ -270,6 +278,9 @@ $(document).ready(function (){
      switch(value){
        case "studying":
           createChart_studying();
+       break;
+       case "studying_pie":
+          createChart_studying_pie();
        break;
        case "expectEnrollmentRate":
           createChart_expectEnrollmentRate();
@@ -311,6 +322,47 @@ $(document).ready(function (){
           }
       });
   }
+
+  function createChart_studying_pie() {
+      $("#chart").empty();
+      var chartPie=[];
+      $.extend(true, chartPie, chart);
+      var totle=0;
+      // for(var i=0;i<chart.length;i++){
+      //     totle+=chart[i].studying;
+      // }
+      for(var i=0;i<chart.length;i++){
+          chartPie[i]["value"]=chart[i].studying;
+          chartPie[i]["color"]=getRandomColor();
+      }
+
+      $("#chart").kendoChart({
+          title:{
+              text: "在读人数（pie）"
+          },
+          renderAs: "canvas",
+          // chartArea: {
+          //     background: ""
+          // },
+          seriesDefaults: {
+              labels: {
+                  visible: true,
+                  background: "transparent",
+                  template: "#= category #: #= value#%"
+              }
+          },
+          series: [{
+              type: "pie",
+              startAngle: 50,
+              data: chartPie
+          }],
+          tooltip: {
+              visible: true,
+              format: "{0}"
+          }
+      });
+  }
+
   function createChart_expectEnrollmentRate() {
       $("#chart").empty();
       $("#chart").kendoChart({

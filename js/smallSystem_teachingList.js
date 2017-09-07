@@ -170,18 +170,18 @@ $(document).ready(function (){
             transport: {
                 read: "json/teachingList.json"
             },
-            //group:{field: "teacher"},
+            // group:{field: "teacher"},
             pageSize:20
         },
         columns: gridColumns,
-        groupable: true,
+        groupable: false,
         sortable: true,
         pageable: {
             refresh: true,
             pageSizes: true,
             buttonCount: 5
         },
-        toolbar: ["create","save", "edit", "cancel", "excel", "pdf"],
+        toolbar: ["create","save", "edit", "cancel", "excel", "pdf", "group"],
         messages:{
           commands: {
             create: "新建班级",
@@ -190,7 +190,8 @@ $(document).ready(function (){
             canceledit: "取消",
             excel: "导出Execl",
             pdf: "导出Pdf",
-            chart:"图表分析"
+            chart:"图表分析",
+            group: "分组"
           }
         },
         excel:{
@@ -215,6 +216,10 @@ $(document).ready(function (){
     $(".k-grid-edit").click(function(e){
        var grid = $("#grid").data("kendoGrid");
            grid.editRow($("#grid tr:eq(1)"));
+    });
+    $(".k-grid-group").click(function(e){
+       var grid = $("#grid").data("kendoGrid"); 
+           grid.dataSource.group({ field: "teacher" });
     });
 
     function popupEdit(e){

@@ -14,6 +14,11 @@ var getRandomColor = function(){
 $(document).ready(function (){
     var gridColumns=[
         {
+          command: ["edit"], 
+          title: "操作 ",
+          width: "80px"
+        },
+        {
             field:'className',
             title: "班号/姓名",
             // locked: true,
@@ -181,7 +186,7 @@ $(document).ready(function (){
             pageSizes: true,
             buttonCount: 5
         },
-        toolbar: ["create","save", "edit", "cancel", "excel", "pdf", "group"],
+        toolbar: ["create","save", "cancel", "excel", "pdf", "group"],
         messages:{
           commands: {
             create: "新建班级",
@@ -195,7 +200,7 @@ $(document).ready(function (){
           }
         },
         excel:{
-          fileName: "CammieTeaching.xlsx",
+          fileName: "Cammie_Teaching.xlsx",
           allPages:true
         },
         detailTemplate: kendo.template($("#class-etail-template").html()),
@@ -206,6 +211,7 @@ $(document).ready(function (){
             title:"编辑",
             width:"550px"
           },
+          update: true,
           template: kendo.template($("#popup-editor").html())
         },
         edit: popupEdit,
@@ -217,16 +223,37 @@ $(document).ready(function (){
        var grid = $("#grid").data("kendoGrid");
            grid.editRow($("#grid tr:eq(1)"));
     });
+    
+    // $(".k-edit-form-container .k-grid-update").click(function(e){
+    //    var grid = $("#grid").data("kendoGrid");
+    //    alert("!")
+    //    var win=$(".k-edit-form-container").closest(".k-window").data("kendoWindow");
+    //        win.close();
+    // });
+
     $(".k-grid-group").click(function(e){
-       var grid = $("#grid").data("kendoGrid"); 
+       var grid = $("#grid").data("kendoGrid");
+       
+       if($(this).hasClass("add")){
+           $(this).removeClass("add");
+           grid.dataSource.group({ field: "" });
+       }else{
+           $(this).addClass("add");
            grid.dataSource.group({ field: "teacher" });
+       }
+        
+       // grid.setOptions({
+       //   dataSource:{
+       //      group:{field: "teacher"}
+       //   } 
+       // });
     });
 
     function popupEdit(e){
         e.container.find(".tabstrip").kendoTabStrip({
           animation:{
             open:{
-              duration: 200,
+              duration: 50,
               effects: "fadeIn"
             }
           }
@@ -234,8 +261,15 @@ $(document).ready(function (){
 
        //if(!e.model.isNew()){
         var className=e.container.find("input[name=className]");
-            className.attr("readonly", true);
+            //className.attr("readonly", true);
        //}
+       e.container.find("input.time").kendoDatePicker({
+        format:"yyyy-MM-dd"
+       });
+
+       // e.container.find(".popup-editor-table").data("kendoGrid");
+       
+       
 
     }
     
@@ -423,7 +457,7 @@ $(document).ready(function (){
       });
   }
 
-   $.ajax({
+  $.ajax({
         type: "GET",
         url: "json/teachingList.json",
         dataType:"json",
@@ -442,5 +476,60 @@ $(document).ready(function (){
               comboBox.trigger("change");
         }
     });
+
+  //------------------------------绘制日程表-----------------------------------//
+  $("#scheduler").kendoScheduler({
+      date: new Date("2017/3/3"),
+      allDaySlot: true,
+      workDayStart: new Date("2017/3/3 1:00 PM"),
+      workDayEnd: new Date("2017/3/3 9:00 PM"),
+      height: 680,
+      messages: {
+        time: "Time of the day",
+        today: "今日",
+        editor:{
+          title:"事件"
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2017/3/3 2:00 PM"),
+          end: new Date("2017/3/3 3:20 PM"),
+          title: "L1-12"
+        },
+        {
+          id: 2,
+          start: new Date("2017/3/3 5:00 PM"),
+          end: new Date("2017/3/3 6:20 PM"),
+          title: "L1-04"
+        },
+        {
+          id: 3,
+          start: new Date("2017/9/8 5:00 PM"),
+          end: new Date("2017/9/8 6:20 PM"),
+          title: "L1-05"
+        },
+        {
+          id: 4,
+          start: new Date("2017/9/9 3:00 PM"),
+          end: new Date("2017/9/9 4:20 PM"),
+          title: "L1-05"
+        },
+        {
+          id: 5,
+          start: new Date("2017/9/7 5:00 PM"),
+          end: new Date("2017/9/7 6:20 PM"),
+          title: "L1-05"
+        },
+        {
+          id: 6,
+          start: new Date("2017/9/10 1:00 PM"),
+          end: new Date("2017/9/10 4:20 PM"),
+          title: "L1-05"
+        }
+      ]
+    });
+
 
 });

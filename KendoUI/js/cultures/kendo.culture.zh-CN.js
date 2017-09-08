@@ -1,35 +1,3 @@
-/** 
- * Kendo UI v2016.3.1118 (http://www.telerik.com/kendo-ui)                                                                                                                                              
- * Copyright 2016 Telerik AD. All rights reserved.                                                                                                                                                      
- *                                                                                                                                                                                                      
- * Kendo UI commercial licenses may be obtained at                                                                                                                                                      
- * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete                                                                                                                                  
- * If you do not own a commercial license, this file shall be governed by the trial license terms.                                                                                                      
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-
-*/
-
-(function(f){
-    if (typeof define === 'function' && define.amd) {
-        define(["kendo.core"], f);
-    } else {
-        f();
-    }
-}(function(){
 (function( window, undefined ) {
     kendo.cultures["zh-CN"] = {
         name: "zh-CN",
@@ -48,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "PRC Yuan Renminbi",
+                name: "Chinese Yuan",
                 abbr: "CNY",
                 pattern: ["$-n","$n"],
                 decimals: 2,
@@ -77,8 +45,8 @@
                     F: "yyyy'年'M'月'd'日' H:mm:ss",
                     g: "yyyy/M/d H:mm",
                     G: "yyyy/M/d H:mm:ss",
-                    m: "M'月'd'日'",
-                    M: "M'月'd'日'",
+                    m: "M月d日",
+                    M: "M月d日",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",
@@ -93,4 +61,3 @@
         }
     }
 })(this);
-}));

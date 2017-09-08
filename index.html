@@ -8,11 +8,11 @@
 <link href="KendoUI/styles/kendo.default.min.css" rel="stylesheet"> 
 <link href="KendoUI/styles/kendo.dataviz.min.css" rel="stylesheet"> 
 <link href="KendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet"> 
+<!-- <link rel="stylesheet" href="KendoUI/styles/kendo.mobile.all.min.css"/> -->
 <link href="css/smallSystem.css" rel="stylesheet">
 <script src="KendoUI/js/jquery.min.js" type="text/javascript"></script> 
 <script src="KendoUI/js/jszip.min.js"></script>
 <script src="KendoUI/js/kendo.all.min.js" type="text/javascript"></script>
-<!-- <script src="KendoUI/js/console.js" type="text/javascript"></script>  -->
 <script src="KendoUI/js/messages/kendo.messages.zh-CN.js" type="text/javascript"></script>
 <script src="KendoUI/js/cultures/kendo.culture.zh-CN.js" type="text/javascript"></script>
 <style>
@@ -52,15 +52,37 @@
 }
 .k-edit-form-container {
     margin-top:-10px;
+    font-size:12px;
 }
+.k-datepicker .k-icon.k-i-calendar {
+    margin: -2px -8px 0;
+}
+
 .bar{
   /*width:900px;*/
   margin: 0 auto;
 }
+/*.k-scheduler-layout.k-scheduler-weekview table tr td:first-child{
+   width:100px;
+}*/
+.k-scheduler-layout>tbody>tr>td:first-child{
+    width:100px !important;
+}
+
+
 </style>
 
 <script id="class-etail-template" type="text/x-kendo-template">
    <div class="studentGrid"></div>
+</script>
+
+<script id="event-template" type="text/x-kendo-template">
+  <div>Title: #: title #</div>
+  <div>Attendees:
+      # for (var i = 0; i < resources.length; i++) { #
+        #: resources[i].text #
+      # } #
+  </div>
 </script>
 
 <script id="popup-editor" type="text/x-kendo-template">
@@ -74,19 +96,23 @@
          <tbody>
            <tr>
              <td><label>班号/姓名：</label><input name="className" class="k-textbox"/></td>
-             <td><label>班级基数：</label><input name="base" class="k-textbox"/></td>
+             <td></td>
            </tr>
            <tr>
-             <td><label>在读人数：</label><input name="studying" class="k-textbox"/></td>
-             <td><label>实际升学人数：</label><input name="actualEnrollment" class="k-textbox"/></td>
+             <td><label>班级基数：</label><input name="base" data-role="numerictextbox" step="1" min="0" max="30" decimals="1"/></td>
+             <td><label>在读人数：</label><input name="studying" data-role="numerictextbox" step="1" min="0" max="30" decimals="1"/></td>
            </tr>
            <tr>
+             <td><label>实际升学人数：</label><input name="actualEnrollment" data-role="numerictextbox" step="1" min="0" max="30" decimals="1"/></td>
              <td><label>实际升学率：</label><input name="actualEnrollmentRate" class="k-textbox"/></td>
-             <td><label>预计升学人数：</label><input name="expectEnrollment" class="k-textbox"/></td>
            </tr>
            <tr>
+             <td><label>预计升学人数：</label><input name="expectEnrollment" data-role="numerictextbox" step="1" min="0" max="30" decimals="1"/></td>
              <td><label>可能升学人员：</label><input name="execptEnrollmentStutents" class="k-textbox"/></td>
+           </tr>
+           <tr>
              <td><label>班型：</label><input name="classType" class="k-textbox"/></td>
+             <td></td>
            </tr>
            <tr>
              <td><label>教师：</label><input name="teacher" class="k-textbox"/></td>
@@ -97,20 +123,20 @@
              <td><label>上课时间：</label><input name="classTime" class="k-textbox"/></td>
            </tr>
            <tr>
-             <td><label>课时数：</label><input name="totalHour" class="k-textbox"/></td>
+             <td><label>课时数：</label><input name="totalHour" data-role="numerictextbox" step="5" min="0" max="300" decimals="1"/></td>
              <td><label>剩余课时：</label><input name="remianHour" class="k-textbox"/></td>
            </tr>
            <tr>
              <td><label>教学进度：</label><input name="progress" class="k-textbox"/></td>
-             <td><label>开班时间：</label><input name="startTime" class="k-textbox"/></td>
+             <td><label>开班时间：</label><input name="startTime" class="time"/></td>
            </tr>
            <tr>
-             <td><label>计划结课时间：</label><input name="planEndTime" class="k-textbox"/></td>
-             <td><label>实际结课时间：</label><input name="actualEndTime" class="k-textbox"/></td>
+             <td><label>计划结课时间：</label><input name="planEndTime" class="time"/></td>
+             <td><label>实际结课时间：</label><input name="actualEndTime" class="time"/></td>
            </tr>
            <tr>
-             <td><label>展示课1：</label><input name="exhibitionClass1" class="k-textbox"/></td>
-             <td><label>展示课2：</label><input name="exhibitionClass2" class="k-textbox"/></td>
+             <td><label>展示课1：</label><input name="exhibitionClass1" class="time"/></td>
+             <td><label>展示课2：</label><input name="exhibitionClass2" class="time"/></td>
            </tr>
          </tbody>
        </table>
@@ -193,8 +219,12 @@
        <label>图表类型：</label><input type="text" id="chartType" style="width:220px;"/>
      </p>
      <!-- 在读人数 -->
-     <div id="chart" class="bar"></div>
+     <div id="chart" class="bar"  style="width:1000px;margin:0 auto;"></div>
+     <p style="margin-bottom:50px;"></p>
+
+     <div id="scheduler" style="width:1000px;margin:0 auto;"></div>
      <p style="margin-bottom:100px;"></p>
+
   </div>
 
   <script src="js/smallSystem_teachingList.js" type="text/javascript"></script>

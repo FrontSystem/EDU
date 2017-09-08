@@ -6,21 +6,6 @@
  * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete                                                                                                                                  
  * If you do not own a commercial license, this file shall be governed by the trial license terms.                                                                                                      
                                                                                                                                                                                                        
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-
 */
 
 (function(f){
@@ -457,7 +442,7 @@ if (kendo.ui.Scheduler) {
 	  "event": "事件",
 	  "time": "时间",
 	  "showFullDay": "显示整天",
-	  "showWorkDay": "显示营业时间",
+	  "showWorkDay": "显示工作时间",
 	  "deleteWindowTitle": "删除事件",
 	  "ariaSlotLabel": "选择从 {0:t} 到 {1:t}",
 	  "ariaEventLabel": "{0} on {1:D} at {2:t}",
@@ -542,9 +527,6 @@ if (kendo.ui.Upload) {
 	  "headerStatusUploaded": "完成"
 	});
 }
-
-
-
 
 /* Spreadsheet messages , LiuDongMing*/
 if (kendo.ui.Spreadsheet) {

@@ -30,10 +30,11 @@
         "totalHour": 120,
         "remianHour": "",
         "progress": "结课",
-        "startTime": 42582,
-        "planEndTime": 42904,
-        "actualEndTime": 42911,
-        "exhibitionClass1": 42687
+        "startTime": "2016-07-01",
+        "planEndTime": "2017-05-19",
+        "actualEndTime": "2017-05-26",
+        "exhibitionClass1": "2016-10-14",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-02",
@@ -66,10 +67,11 @@
         "totalHour": 123,
         "remianHour": -3,
         "progress": "结课",
-        "startTime": "2016年10月7号",
-        "planEndTime": "2017年8月5号",
-        "actualEndTime": "2017年7月15号",
-        "exhibitionClass1": ""
+        "startTime": "2016-10-07",
+        "planEndTime": "2017-08-05",
+        "actualEndTime": "2017-07-15",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-03",
@@ -102,10 +104,11 @@
         "totalHour": 120,
         "remianHour": "",
         "progress": "结课",
-        "startTime": 42630,
-        "planEndTime": 42910,
-        "actualEndTime": 42932,
-        "exhibitionClass1": 42756
+        "startTime": "2016-08-18",
+        "planEndTime": "2017-05-25",
+        "actualEndTime": "2017-06-17",
+        "exhibitionClass1": "2017-00-22",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-04",
@@ -138,10 +141,11 @@
         "totalHour": "120",
         "remianHour": "0",
         "progress": "结课",
-        "startTime": 42626,
-        "planEndTime": 42937,
-        "actualEndTime": "2017年7月13号",
-        "exhibitionClass1": 42805
+        "startTime": "2016-08-14",
+        "planEndTime": "2017-06-22",
+        "actualEndTime": "2017-07-13",
+        "exhibitionClass1": "2017-02-12",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-05",
@@ -174,10 +178,11 @@
         "totalHour": "132",
         "remianHour": -12,
         "progress": "结课",
-        "startTime": "2016年9月20号",
-        "planEndTime": "2017年7月25号",
-        "actualEndTime": "2017年7月29号",
-        "exhibitionClass1": "2017年4月18号"
+        "startTime": "2016-09-20",
+        "planEndTime": "2017-07-25",
+        "actualEndTime": "2017-07-29",
+        "exhibitionClass1": "2017-04-18",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-06",
@@ -210,7 +215,11 @@
         "totalHour": "82",
         "remianHour": 38,
         "progress": "组合音oi",
-        "startTime": 42633
+        "startTime": "2016-08-21",
+        "planEndTime": "",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-07",
@@ -243,10 +252,11 @@
         "totalHour": "120",
         "remianHour": "",
         "progress": "结课",
-        "startTime": 42643,
-        "planEndTime": 42932,
-        "actualEndTime": 42932,
-        "exhibitionClass1": 42811
+        "startTime": "2016-09-01",
+        "planEndTime": "2017-06-17",
+        "actualEndTime": "2017-06-17",
+        "exhibitionClass1": "2017-02-18",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-08",
@@ -279,10 +289,11 @@
         "totalHour": "114",
         "remianHour": "6",
         "progress": "第四册第17篇",
-        "startTime": "2016年10月13号",
-        "planEndTime": "2017年8月3号",
-        "actualEndTime": "2017年8月30号",
-        "exhibitionClass1": "2017年4月13号"
+        "startTime": "2016-10-13",
+        "planEndTime": "2017-08-03",
+        "actualEndTime": "2017-08-30",
+        "exhibitionClass1": "2017-04-13",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-09",
@@ -315,10 +326,11 @@
         "totalHour": "120",
         "remianHour": "",
         "progress": "结课",
-        "startTime": 42633,
-        "planEndTime": 42938,
-        "actualEndTime": 42942,
-        "exhibitionClass1": 42841
+        "startTime": "2016-08-21",
+        "planEndTime": "2017-06-23",
+        "actualEndTime": "2017-06-27",
+        "exhibitionClass1": "2017-03-17",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-10",
@@ -351,8 +363,11 @@
         "totalHour": "120",
         "remianHour": "",
         "progress": "结课",
-        "startTime": 42679,
-        "planEndTime": 42974
+        "startTime": "2016-10-06",
+        "planEndTime": "2017-07-28",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-11",
@@ -385,8 +400,11 @@
         "totalHour": "72 ",
         "remianHour": "48",
         "progress": "u-e阅读",
-        "startTime": 42687,
-        "planEndTime": 43100
+        "startTime": "2016-10-14",
+        "planEndTime": "2018-00-01",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-12",
@@ -419,9 +437,11 @@
         "totalHour": 81,
         "remianHour": 39,
         "progress": "er音后缀",
-        "startTime": 42690,
-        "planEndTime": 42984,
-        "actualEndTime": 43012
+        "startTime": "2016-10-17",
+        "planEndTime": "2017-08-07",
+        "actualEndTime": "2017-09-05",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-13",
@@ -454,8 +474,11 @@
         "totalHour": "   90",
         "remianHour": 30,
         "progress": "er 音后缀",
-        "startTime": 42741,
-        "planEndTime": 43028
+        "startTime": "2017-00-07",
+        "planEndTime": "2017-09-21",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-14",
@@ -488,8 +511,11 @@
         "totalHour": "48",
         "remianHour": 72,
         "progress": "R音节ar",
-        "startTime": 42798,
-        "planEndTime": 43071
+        "startTime": "2017-02-05",
+        "planEndTime": "2017-11-03",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-15",
@@ -522,9 +548,11 @@
         "totalHour": "66",
         "remianHour": "54",
         "progress": "ear阅读",
-        "startTime": 42801,
-        "planEndTime": "2017年11月4日",
-        "actualEndTime": "2017年11月4日"
+        "startTime": "2017-02-08",
+        "planEndTime": "2017-11-04",
+        "actualEndTime": "2017-11-04",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-16",
@@ -557,9 +585,11 @@
         "totalHour": 48,
         "remianHour": 72,
         "progress": "au阅读",
-        "startTime": 42819,
-        "planEndTime": 43064,
-        "actualEndTime": 43064
+        "startTime": "2017-02-26",
+        "planEndTime": "2017-10-26",
+        "actualEndTime": "2017-10-26",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-17",
@@ -592,9 +622,11 @@
         "totalHour": "42",
         "remianHour": "78",
         "progress": "长元音测试",
-        "startTime": "2017年3月26号",
-        "planEndTime": "2017年11月26号",
-        "actualEndTime": "2017年11月26号"
+        "startTime": "2017-03-26",
+        "planEndTime": "2017-11-26",
+        "actualEndTime": "2017-11-26",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-18",
@@ -627,9 +659,11 @@
         "totalHour": "66",
         "remianHour": 54,
         "progress": "五步流程处理流程",
-        "startTime": 42838,
-        "planEndTime": 43090,
-        "actualEndTime": 43090
+        "startTime": "2017-03-14",
+        "planEndTime": "2017-11-22",
+        "actualEndTime": "2017-11-22",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-19",
@@ -662,7 +696,11 @@
         "totalHour": "42",
         "remianHour": "78",
         "progress": "组合音oi",
-        "startTime": 42893
+        "startTime": "2017-05-08",
+        "planEndTime": "",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     },
     {
         "className": "L1-20",
@@ -695,6 +733,10 @@
         "totalHour": "15",
         "remianHour": 105,
         "progress": "短元音e",
-        "startTime": 42917
+        "startTime": "2017-06-02",
+        "planEndTime": "",
+        "actualEndTime": "",
+        "exhibitionClass1": "",
+        "exhibitionClass2": ""
     }
 ]

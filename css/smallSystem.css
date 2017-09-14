@@ -127,3 +127,13 @@ html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,tab
   font-size: 14px;
   vertical-align: middle;
 }
+#footer{
+  height:60px;
+  line-height: 60px;
+  font-size:17px;
+  background-color:#f1f1f1;
+  text-align: center;
+}
+#footer a+a{
+  margin-left:50px;
+}

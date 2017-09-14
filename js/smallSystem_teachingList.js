@@ -12,17 +12,18 @@ var getRandomColor = function(){
   })('');    
 };
 $(document).ready(function (){
+    //表格数据源
+    var gridData=[];
+    //
     var gridColumns=[
-        {
-          command: ["edit"], 
-          title: "操作 ",
-          width: "80px"
+        { 
+          command: ["edit"],
+          width:80
         },
         {
             field:'className',
             title: "班号/姓名",
-            // locked: true,
-            width: "50px",
+            width: "55px",
             headerAttributes: {
               style: "text-align:center;"
             }
@@ -106,7 +107,7 @@ $(document).ready(function (){
         },{
             field: 'classTime',
             title: "上课时间",
-            width: "120px",
+            width: "115px",
             headerAttributes: {
               style: "text-align: center;"
             }
@@ -134,35 +135,35 @@ $(document).ready(function (){
         },{
             field: 'startTime',
             title: "开班时间",
-            width: "120px",
+            width: "90px",
             headerAttributes: {
               style: "text-align: center;"
             }
         },{
             field: 'planEndTime',
             title: "计划结课时间",
-            width: "120px",
+            width: "90px",
             headerAttributes: {
               style: "text-align: center;"
             }
         },{
             field: 'actualEndTime',
             title: "实际结课时间",
-            width: "120px",
+            width: "90px",
             headerAttributes: {
               style: "text-align: center;"
             }
         },{
             field: 'exhibitionClass1',
             title: "展示课1",
-            width: "120px",
+            width: "90px",
             headerAttributes: {
               style: "text-align: center;"
             }
         },{
             field: 'exhibitionClass2',
             title: "展示课2",
-            width: "120px",
+            width: "90px",
             headerAttributes: {
               style: "text-align: center;"
             }
@@ -170,14 +171,6 @@ $(document).ready(function (){
     ];
 
     $("#grid").kendoGrid({
-        dataSource: {
-            type: "json",
-            transport: {
-                read: "json/teachingList.json"
-            },
-            // group:{field: "teacher"},
-            pageSize:20
-        },
         columns: gridColumns,
         groupable: false,
         sortable: true,
@@ -186,7 +179,7 @@ $(document).ready(function (){
             pageSizes: true,
             buttonCount: 5
         },
-        toolbar: ["create","save", "cancel", "excel", "pdf", "group"],
+        toolbar: ["create","save", "cancel", "excel", "pdf", "group", "ungroup"],
         messages:{
           commands: {
             create: "新建班级",
@@ -196,7 +189,8 @@ $(document).ready(function (){
             excel: "导出Execl",
             pdf: "导出Pdf",
             chart:"图表分析",
-            group: "分组"
+            group: "分组",
+            ungroup: "取消分组"
           }
         },
         excel:{
@@ -206,48 +200,27 @@ $(document).ready(function (){
         detailTemplate: kendo.template($("#class-etail-template").html()),
         detailInit: detailInit,
         editable: {
-          mode:"popup",
+          mode: "popup",
           window:{
             title:"编辑",
-            width:"550px"
+            width:"550px",
+            modal: true
           },
-          update: true,
           template: kendo.template($("#popup-editor").html())
         },
-        edit: popupEdit,
-        dataBound: function(){
-           //this.expandRow(this.tbody.find("tr.k-master-row").first());//展开第一行
-        }
+        edit: popupEdit
     });
-    $(".k-grid-edit").click(function(e){
-       var grid = $("#grid").data("kendoGrid");
-           grid.editRow($("#grid tr:eq(1)"));
-    });
-    
-    // $(".k-edit-form-container .k-grid-update").click(function(e){
-    //    var grid = $("#grid").data("kendoGrid");
-    //    alert("!")
-    //    var win=$(".k-edit-form-container").closest(".k-window").data("kendoWindow");
-    //        win.close();
-    // });
 
+    //按教师姓名对表格进行分组、取消分组
     $(".k-grid-group").click(function(e){
        var grid = $("#grid").data("kendoGrid");
-       
-       if($(this).hasClass("add")){
-           $(this).removeClass("add");
-           grid.dataSource.group({ field: "" });
-       }else{
-           $(this).addClass("add");
            grid.dataSource.group({ field: "teacher" });
-       }
-        
-       // grid.setOptions({
-       //   dataSource:{
-       //      group:{field: "teacher"}
-       //   } 
-       // });
     });
+    $(".k-grid-ungroup").click(function(e){
+       var grid = $("#grid").data("kendoGrid");
+           grid.setDataSource(getDataSourceByData(gridData));
+    });
+
 
     function popupEdit(e){
         e.container.find(".tabstrip").kendoTabStrip({
@@ -260,17 +233,15 @@ $(document).ready(function (){
         });
 
        //if(!e.model.isNew()){
-        var className=e.container.find("input[name=className]");
+        //var className=e.container.find("input[name=className]");
             //className.attr("readonly", true);
        //}
        e.container.find("input.time").kendoDatePicker({
-        format:"yyyy-MM-dd"
+          format:"yyyy/MM/dd"
        });
 
        // e.container.find(".popup-editor-table").data("kendoGrid");
        
-       
-
     }
     
     function detailInit(e){
@@ -296,6 +267,43 @@ $(document).ready(function (){
            ]
        });
     }
+
+    $.ajax({
+        type: "GET",
+        url: "json/teachingList.json",
+        dataType:"json",
+        success: function(data){
+          var grid = $("#grid").data("kendoGrid");
+          gridData=data;
+          var myDataSource=new kendo.data.DataSource({
+              type: "json",
+              // transport: {
+              //     read: {
+              //       url: "/json/teachingList",
+              //       dataType: "json",
+              //       data: {type: "all",d: Math.random()}
+              //     }
+              // },
+              data: data,
+              pageSize:10,
+              // requestEnd: function(e){
+              //   var response=e.response;
+              //   if(response){
+              //      gridData=response;
+              //   }
+              // },
+              schema: {
+                id: "className",
+                model: {
+                  fields: {
+                    className: {validation: { required: true } }
+                  }
+                }
+              }
+          });
+        grid.setDataSource(myDataSource);
+        }
+    });
    //------------------------------绘制图表-----------------------------------//
     $("#chartType").kendoComboBox({
       placeholder: "请选择图表类型...",
@@ -478,12 +486,47 @@ $(document).ready(function (){
     });
 
   //------------------------------绘制日程表-----------------------------------//
+  $("#schedulerType").kendoComboBox({
+      placeholder: "请选择教师...",
+      dataTextField: "text",
+      dataValueField: "value",
+      filter: "contains",
+      autoClose: false,
+      change: function(e){
+        var value=this.value();
+        var scheduler=$("#scheduler").data("kendoScheduler");
+        if(value!="全部"){
+           scheduler.dataSource.filter({field: "teacher", operator: "startswith", value: value});
+        }else{
+           scheduler.dataSource.filter({field: "teacher", operator: "startswith", value: ""});
+        }
+      }
+   });
+  function getView(data){
+     var dataSource=new kendo.data.DataSource({
+         data: data
+     });
+     dataSource.group({field:"teacher"});
+     var view = dataSource.view();
+     var items=[];
+     items.push({
+        text :"全部",
+        value: "全部"
+     });
+     for(var i=0;i<view.length;i++){
+        items.push({
+          text :view[i].value,
+          value: view[i].value
+        });
+     }
+     return items;
+  }
   $("#scheduler").kendoScheduler({
-      date: new Date("2017/3/3"),
+      date: new Date("2017/9/13"),
       allDaySlot: true,
-      workDayStart: new Date("2017/3/3 1:00 PM"),
-      workDayEnd: new Date("2017/3/3 9:00 PM"),
-      height: 680,
+      workDayStart: new Date("2017/9/13 8:00 AM"),
+      workDayEnd: new Date("2017/9/13 9:00 PM"),
+      height: 700,
       messages: {
         time: "Time of the day",
         today: "今日",
@@ -491,45 +534,26 @@ $(document).ready(function (){
           title:"事件"
         }
       },
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2017/3/3 2:00 PM"),
-          end: new Date("2017/3/3 3:20 PM"),
-          title: "L1-12"
+      dataSource: {
+        type: "json",
+        transport: {
+          read: {
+            url: "json/schedular.json"
+          }
         },
-        {
-          id: 2,
-          start: new Date("2017/3/3 5:00 PM"),
-          end: new Date("2017/3/3 6:20 PM"),
-          title: "L1-04"
-        },
-        {
-          id: 3,
-          start: new Date("2017/9/8 5:00 PM"),
-          end: new Date("2017/9/8 6:20 PM"),
-          title: "L1-05"
-        },
-        {
-          id: 4,
-          start: new Date("2017/9/9 3:00 PM"),
-          end: new Date("2017/9/9 4:20 PM"),
-          title: "L1-05"
-        },
-        {
-          id: 5,
-          start: new Date("2017/9/7 5:00 PM"),
-          end: new Date("2017/9/7 6:20 PM"),
-          title: "L1-05"
-        },
-        {
-          id: 6,
-          start: new Date("2017/9/10 1:00 PM"),
-          end: new Date("2017/9/10 4:20 PM"),
-          title: "L1-05"
+        requestEnd: function(e){
+          var response=e.response;
+          //console.log("response", response);
+          if(response!=undefined){
+            var view=getView(response);
+            //console.log("view", view);
+            var schedulerType=$("#schedulerType").data("kendoComboBox")
+                schedulerType.setDataSource(getDataSourceByData(view));
+                schedulerType.select(0);
+                schedulerType.trigger("change");
+          }
         }
-      ]
+      }
     });
-
 
 });

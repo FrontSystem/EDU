@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>教学信息管理</title>
+<meta charset="utf-8">
+<link href="KendoUI/styles/kendo.common.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.rtl.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.default.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet"> 
+<link href="stylesheets/smallSystem.css" rel="stylesheet">
+<script src="KendoUI/js/jquery.min.js" type="text/javascript"></script> 
+<script src="KendoUI/js/jszip.min.js"></script>
+<script src="KendoUI/js/kendo.all.js" type="text/javascript"></script>
+<script src="KendoUI/js/messages/kendo.messages.zh-CN.js" type="text/javascript"></script>
+<script src="KendoUI/js/cultures/kendo.culture.zh-CN.js" type="text/javascript"></script>
+<script src="javascripts/base.js" type="text/javascript"></script>
+<style>
+#grid{
+  font-size: 13px;
+}
+/*自动换行*/
+.k-grid-header th.k-header > .k-link {
+  overflow: visible !important;
+  word-wrap:break-word !important;
+  white-space:normal !important;
+  word-break:break-all;
+  table-layout:fixed !important;
+}
+/*自动换行*/
+.k-grid-header th.k-header {
+    vertical-align: middle !important;
+    height: auto !important;
+    table-layout:fixed !important;
+    text-align: center !important;
+    white-space: normal !important;
+}
+.k-edit-form-container {
+     width: 100%; 
+}
+.popup-editor-table{
+  margin:0 3%;
+  width:94%;
+}
+.popup-editor-table tr{
+  height:30px;
+  line-height: 30px;
+}
+.popup-editor-table tr td label{
+  display: inline-block;
+  width:85px;
+}
+.k-edit-form-container {
+    margin-top:-10px;
+    font-size:12px;
+}
+.k-datepicker .k-icon.k-i-calendar {
+    margin: -2px -8px 0;
+}
+/*.k-scheduler-layout.k-scheduler-weekview table tr td:first-child{
+   width:100px;
+}*/
+.k-scheduler-layout>tbody>tr>td:first-child{
+    width:100px !important;
+}
+.k-event-actions:first-child {
+    float: none; 
+}
+.k-event, .k-task-complete {
+   font-size:13px;
+}
+.k-event-template {
+    /* padding: .3em 1.4em .3em .6em; */
+    padding:0;
+}
+</style>
+
+</head>
+<body>
+  <div class="main">
+    <div id="header">
+         <h5>Cammie(蒋民)教学信息管理</h5>
+     </div>
+     <ul id="menu"></ul>
+     <div class="box-hd">
+        <div class="hwrap">
+          <span class="s"></span>
+            <div class="hgroup">
+              <h3>教学日程</h3>
+              <small>Teaching schedule</small>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+     <table class="filterBox">
+         <tr>
+           <td width="33%">
+              <label>学习阶段：</label><input type="text" id="degree" style="width:220px;"/>
+           </td>
+           <td width="33%">
+              <label>日程表：</label><input type="text" id="schedulerType" style="width:220px;"/>
+           </td>
+           <td width="33%"></td>
+         </tr>
+       </table>
+     <div id="scheduler" style="width:1000px;margin:0 auto;"></div>
+     <p style="margin-bottom:20px;"></p>
+
+     <div id="footer">
+       <a href="https://frontsystem.github.io/GKD/">技术支持：FrontSystem</a>
+       <a>个人软件</a>
+       <a href="http://www.kendoui.io/home/buy.html">未获得KendoUI商业授权</a>
+     </div>
+  </div>
+  <script src="javascripts/scheduler.js" type="text/javascript"></script>
+</body>
+</html>

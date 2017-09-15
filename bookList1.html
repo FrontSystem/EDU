@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+<title>FrontSystem前端图书列表1</title> 
+<meta charset="utf-8">
+<link href="KendoUI/styles/kendo.common.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.rtl.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.default.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet"> 
+<link href="css/smallSystem.css" rel="stylesheet">
+<script src="KendoUI/js/jquery.min.js" type="text/javascript"></script> 
+<script src="KendoUI/js/kendo.all.min.js" type="text/javascript"></script> 
+<script src="KendoUI/js/console.js" type="text/javascript"></script> 
+<script src="KendoUI/js/messages/kendo.messages.zh-CN.js" type="text/javascript"></script>  
+<script src="KendoUI/js/cultures/kendo.culture.zh-CN.js" type="text/javascript"></script>
+ </head> 
+ <body> 
+   <div class="main">
+     <div id="header">
+         <h5>FrontSystem前端图书列表1</h5>
+     </div>
+     <p style="margin-bottom:10px;">
+          <label for="filterList">关键字筛选：</label><input id="filterList"/>
+          <button id="parse" type="button">解析</button>
+     </p>
+     <div id="grid"></div> 
+  </div>
+ <script>
+ function getDataSourceByData(data){
+    return new kendo.data.DataSource({
+      data: data,
+      pageSize: 10
+    });
+  }
+    $(document).ready(function () {
+
+        $("#filterList").kendoDropDownList({
+            dataSource: {
+              data: ["All", "HTML", "CSS", "Web", "JavaScript", "jQuery", "HTTP", "Node"]
+            },
+            animation: false,
+            change: function(e){
+              var value=this.value();
+              $.ajax({
+                  type: "GET",
+                  url: "/json/bookList1?filterKey="+value+"&d="+Math.random(),
+                  processData:true,
+                  success:function(data){
+                     var grid=$("#grid").data("kendoGrid");
+                         grid.setDataSource(getDataSourceByData(data));
+                  },
+                  error:function(){
+
+                  }
+              });
+            }
+        });
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/json/bookList1"
+                },
+                pageSize: 10
+            },
+            groupable: true,
+            sortable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    field: "name",
+                    title: "书名",
+                    headerAttributes: {
+                      style: "text-align: center;"
+                    }
+                },{
+                    field: "url",
+                    title: "地址",
+                    width: 300,
+                    template:"<a class='link' href='#:url#' target='_blank'>#: url #</a>",
+                    headerAttributes: {
+                      style: "text-align: center;"
+                    }
+                }
+            ]
+        });
+    });
+  </script> 
+ </body>
+</html>

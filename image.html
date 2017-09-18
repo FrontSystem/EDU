@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FrontSystem图片上传</title> 
+<meta charset="utf-8">
+<link href="KendoUI/styles/kendo.common.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.rtl.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.default.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.min.css" rel="stylesheet"> 
+<link href="KendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet"> 
+<link href="stylesheets/smallSystem.css" rel="stylesheet">
+<script src="KendoUI/js/jquery.min.js" type="text/javascript"></script> 
+<script src="KendoUI/js/kendo.all.min.js" type="text/javascript"></script> 
+<!-- <script src="KendoUI/js/console.js" type="text/javascript"></script>  -->
+<script src="KendoUI/js/messages/kendo.messages.zh-CN.js" type="text/javascript"></script>  
+<script src="KendoUI/js/cultures/kendo.culture.zh-CN.js" type="text/javascript"></script>
+<script src="javascripts/base.js" type="text/javascript"></script>
+<style>
+li.k-file{
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  position: relative;
+  border:1px solid #d5d5d5;
+  border-top: 0;
+}
+.k-upload-files{
+  clear:both;
+  float:left;
+}
+.k-widget.k-upload .k-dropzone{
+  text-align: center;
+}
+/*.k-widget.k-upload .k-i-insert-file{
+  vertical-align: middle !important;
+}*/
+.k-upload .k-clear-selected, .k-upload .k-upload-selected{
+  display: none;
+}
+#photoForm .photoButton{
+  margin:20px auto;
+  text-align:center;
+  float:left;
+  clear:left;
+  width:100%;
+}
+#photoForm .photoButton>a.k-button{
+  padding-left:20px;
+  padding-right:20px;
+}
+.file-wrapper.ucas td>span{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width:94%;
+   display: inline-block;
+}
+.k-widget.k-upload.k-header{
+  min-height:320px;
+  background-color: transparent;
+  float:left;
+  width:100%;
+}
+.k-widget.k-upload.k-header .k-dropzone{
+  background-color: #eae8e8;
+}
+
+
+#listView {
+  padding: 10px 5px;
+  margin-bottom: -1px;
+  min-height: 510px;
+}
+.product {
+  float: left;
+  position: relative;
+  width: 111px;
+  height: 170px;
+  margin: 0 5px;
+  padding: 0;
+}
+.product img {
+  width: 110px;
+  height: 110px;
+}
+.product h3 {
+  margin: 0;
+  padding: 3px 5px 0 0;
+  max-width: 96px;
+  overflow: hidden;
+  line-height: 1.1em;
+  font-size: .9em;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #999;
+}
+.product p {
+  visibility: hidden;
+}
+.product:hover p {
+  visibility: visible;
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 110px;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0,0,0,0.75);
+  transition: background .2s linear, color .2s linear;
+  -moz-transition: background .2s linear, color .2s linear;
+  -webkit-transition: background .2s linear, color .2s linear;
+  -o-transition: background .2s linear, color .2s linear;
+}
+.k-listview:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+</style>
+</head>
+<body>
+  <div class="main">
+    <div id="header">
+         <h5>Cammie(蒋民)教学信息管理</h5>
+     </div>
+     <ul id="menu"></ul>
+     <div class="box-hd">
+        <div class="hwrap">
+          <span class="s"></span>
+            <div class="hgroup">
+              <h3>图像上传</h3>
+              <small>Image upload</small>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+     <table class="filterBox">
+         <tr>
+           <td width="33%">
+              <label>学习阶段：</label><input type="text" id="degree" style="width:220px;"/>
+           </td>
+           <td width="33%">
+             <label>图片类型：</label><input type="text" id="imageType" style="width:220px;"/>
+           </td>
+           <td width="33%" class="imageMutex">
+              <label>班级：</label><input type="text" id="className" style="width:220px;"/>
+           </td>
+           <td width="33%" class="imageMutex">
+              <label>教师：</label><input type="text" id="teacher" style="width:220px;"/>
+           </td>
+           <td width="33%" class="imageMutex">
+              <label>学生：</label><input type="text" id="student" style="width:220px;"/>
+           </td>
+           <td width="33%" class="placeholder"></td>
+         </tr>
+       </table>
+
+    <div>
+      <form id="photoForm" method="post" enctype="multipart/form-data" action="/photo_upload">
+         <input type="hidden" name="fileType" value="image"/>
+         <input type="hidden" name="imageType" value=""/>
+         <input type="hidden" name="subType" value=""/>
+         <p><input type="file" id="photo" name="file" accept="image/jpeg, image/png"/></p>
+         <p class="photoButton">
+            <a id="photoSave" class="k-button" href="javascript:void(0)">提交</a>
+            <a id="photoCancel" class="k-button" href="javascript:void(0)">取消</a>
+         </p>
+      </form>
+    </div>
+
+    <div class="demo-section k-content wide" style="clear:both;"> 
+       <div id="listView"></div> 
+       <div id="pager" class="k-pager-wrap"></div> 
+    </div> 
+     
+     <p style="margin-bottom:20px;"></p>
+     <div id="footer">
+       <a href="https://frontsystem.github.io/GKD/">技术支持：FrontSystem</a>
+       <a>个人软件</a>
+       <a href="http://www.kendoui.io/home/buy.html">未获得KendoUI商业授权</a>
+     </div>
+  </div>
+  <script id="fileTemplate" type="text/x-kendo-template">
+      <span class='k-progress'></span>
+      <table class='file-wrapper ucas' style="width:100%;text-align:left;">
+        <tr>
+          <td style="width:160px;height:120px;text-align:center;vertical-align:middle;">
+            <img src="" class="uploadPreview" style="width:auto;max-width:160px;height:120px;"/>
+          </td>
+          <td style="padding-left:10px;">
+            <span>图片名: #=name#</span><br/>
+            <span>图片大小: #=parseInt(size/1024)# KB</span>
+            <!-- <br/>
+            <span>设为头像: <input type="radio"/></span> -->
+          </td>
+          <td style="width:20px;"><button type='button' class='k-upload-action'>x</button></td>
+        </tr>
+      </table>
+  </script>
+  <script type="text/x-kendo-template" id="template">
+      <div class="product">
+          <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+          <h3>#:ProductName#</h3>
+          <p>#:kendo.toString(UnitPrice, "c")#</p>
+      </div>
+  </script> 
+  <script src="javascripts/image.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("#photo").click(function() {
+        $("#photo").uploadPreview({multiple: true});
+    });
+    $(".k-upload-button").click(function() {
+        $("#photo").uploadPreview({multiple: true});
+    });
+  });
+</script>
+</body>
+</html>

@@ -104,7 +104,7 @@ $(document).ready(function () {
             }
         },
         batch: true,
-        pageSize: 4,
+        pageSize: 6,
         schema: {
             model: {
                 id: "ProductID",

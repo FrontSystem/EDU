@@ -175,7 +175,7 @@ html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,tab
 
 .student-view {
   float:left;
-  width:50%;
+  width:33%;
   height:300px;
   box-sizing:border-box;
   border-top:0;
@@ -233,7 +233,12 @@ media only screen and (max-width:620px) {
     border-left-width:1px;
   }
 }
-
-#header{
+.filterBox .imageMutex{
   display: none;
 }
+
+
+
+/*#header{
+  display: none;
+}*/
